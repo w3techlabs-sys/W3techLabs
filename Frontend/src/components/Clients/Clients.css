@@ -32,7 +32,7 @@
   font-size: 17px;
 }
 
-/* 5 cards desktop */
+/* 5 columns desktop */
 @media (min-width: 992px) {
   .col-lg-2-4 {
     width: 20%;
@@ -49,12 +49,14 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* button */
 .clients-btn-wrap {
   margin-top: 55px;
   text-align: center;
@@ -67,6 +69,7 @@
   background: linear-gradient(135deg, #7c3aed, #2563eb);
   color: white;
   font-weight: 600;
+  text-decoration: none;
   box-shadow: 0 15px 35px rgba(124, 58, 237, 0.28);
   transition: 0.35s ease;
 }
@@ -75,4 +78,60 @@
   color: white;
   transform: translateY(-4px);
   box-shadow: 0 22px 45px rgba(124, 58, 237, 0.4);
+}
+
+/* tablet */
+@media (max-width: 991px) {
+  .clients-section {
+    padding: 80px 0;
+  }
+
+  .clients-header h2 {
+    font-size: 38px;
+  }
+
+  .clients-header p {
+    font-size: 16px;
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .clients-section {
+    padding: 60px 0;
+  }
+
+  .clients-header {
+    margin-bottom: 40px;
+  }
+
+  .clients-header h2 {
+    font-size: 30px;
+  }
+
+  .clients-header p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .clients-btn {
+    padding: 13px 28px;
+    font-size: 14px;
+  }
+}
+
+/* small mobile */
+@media (max-width: 480px) {
+  .clients-header h2 {
+    font-size: 26px;
+  }
+
+  .clients-header span {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+
+  .clients-header p {
+    font-size: 14px;
+  }
 }

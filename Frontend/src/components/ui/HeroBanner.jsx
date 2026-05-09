@@ -119,7 +119,7 @@ const HeroBanner = () => {
                     className="col-lg-6 hero-right"
                     data-aos="fade-left"
                   >
-                    <div className="floating-wrapper">
+                    <div className="floating-wrapper mobile-grid">
                       {floatingCards.map((card, i) => (
                         <div
                           className={`floating-card card-${i + 1}`}
