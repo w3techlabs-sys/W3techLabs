@@ -16,13 +16,13 @@
   grid-template-columns: 1fr 1fr;
 
   /* reduced height */
-  min-height: 560px;
+  min-height: 350px;
 
   box-shadow: 0 30px 80px rgba(0,0,0,.15);
 }
 
 .contact-left {
-  padding: 40px 50px;
+  padding: 15px 50px;
   display: flex;
   align-items: center;
 }
@@ -42,18 +42,19 @@
 
 .contact-call-box {
   position: absolute;
-  left: 30px;
-  bottom: 30px;
+
+  /* left: 30px; */
+
+  top: 555px;   /* 👈 yahan se top spacing milegi */
+  /* bottom: 30px; remove this */
 
   background: #170d35;
-  border-radius: 18px;
+  border-radius: 0px 18px 18px 0px;
 
-  /* reduced size */
   padding: 16px 22px;
 
   display: flex;
   align-items: center;
-  gap: 14px;
 
   min-width: 240px;
 
