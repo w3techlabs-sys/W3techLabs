@@ -97,3 +97,19 @@
     justify-content: center;
   }
 }
+
+/* MESSAGE */
+
+.form-message {
+  margin-top: 18px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* DISABLED BUTTON */
+
+.contact-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

@@ -1,14 +1,52 @@
-import Contact from "../models/ContactMessage.js";
+import ContactMessage from "../models/ContactMessage.js";
 
-export const sendMessage = async (req, res) => {
-  const msg = await Contact.create(req.body);
-  console.log("BODY:", req.body);
-  console.log("Headers:", req.headers);
-  
-  res.json(msg);
-};
+export const createContactMessage = async (req, res) => {
 
-export const getMessages = async (req, res) => {
-  const msgs = await Contact.find();
-  res.json(msgs);
+  try {
+
+    const {
+      name,
+      email,
+      subject,
+      phone,
+      message,
+    } = req.body;
+
+    /* VALIDATION */
+    if (
+      !name ||
+      !email ||
+      !subject ||
+      !phone ||
+      !message
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    /* SAVE TO DATABASE */
+    const contact = await ContactMessage.create({
+      name,
+      email,
+      subject,
+      phone,
+      message,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Message sent successfully",
+      data: contact,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
 };
