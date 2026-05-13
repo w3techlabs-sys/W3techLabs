@@ -1,47 +1,33 @@
-import bcrypt from "bcryptjs";
 import User from "../models/user.js";
-import generateToken from "../utils/generateToken.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-/*
-@desc    Admin Login
-@route   POST /api/admin/login
-@access  Public
-*/
-
-export const loginAdmin = async (req, res) => {
+export const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check fields
+    // check fields
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Email and password are required",
+        message: "Email and password required",
       });
     }
 
-    // Find admin
-    const admin = await User.findOne({ email });
+    // find user
+    const user = await User.findOne({ email });
 
-    if (!admin) {
+    if (!user) {
       return res.status(401).json({
         success: false,
         message: "Invalid email",
       });
     }
 
-    // Check role
-    if (admin.role !== "admin") {
-      return res.status(403).json({
-        success: false,
-        message: "Access denied",
-      });
-    }
-
-    // Compare password
+    // compare password
     const isMatch = await bcrypt.compare(
       password,
-      admin.password
+      user.password
     );
 
     if (!isMatch) {
@@ -51,16 +37,33 @@ export const loginAdmin = async (req, res) => {
       });
     }
 
-    // Success response
+    // admin check
+    if (user.role !== "admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied",
+      });
+    }
+
+    // generate token
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
     res.status(200).json({
       success: true,
-      message: "Login successful",
-      token: generateToken(admin._id),
+      token,
       user: {
-        id: admin._id,
-        name: admin.name,
-        email: admin.email,
-        role: admin.role,
+        id: user._id,
+        email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {
