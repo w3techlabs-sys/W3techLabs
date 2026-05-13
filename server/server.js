@@ -12,10 +12,10 @@ const router = express.Router();
 app.use(cors());
 app.use(express.json());
 
-import authRoutes from "./authRoutes.js";
-import serviceRoutes from "./serviceRoutes.js";
-import quoteRoutes from "./quoteRoutes.js";
-import contactRoutes from "./contactRoutes.js";
+//import authRoutes from "./authRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
+import quoteRoutes from "./routes/quoteRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 router.use("/auth", authRoutes);
 router.use("/services", serviceRoutes);
