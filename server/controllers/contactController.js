@@ -1,7 +1,7 @@
 import ContactMessage from "../models/ContactMessage.js";
 
 export const createContactMessage = async (req, res) => {
-
+  console.log("Received contact message:", req.body);
   try {
 
     const {
