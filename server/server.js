@@ -4,7 +4,6 @@ import cors from "cors";
 
 import contactRoutes from "./routes/contactRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-
 dotenv.config();
 
 const app = express();
