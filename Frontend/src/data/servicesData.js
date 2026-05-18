@@ -1,14 +1,16 @@
-import webImg from "../assets/web.webp";
-import ecommerceImg from "../assets/ecommerce.webp";
-import marketingImg from "../assets/marketing.webp";
-
+// import webImg from "../assets/web.webp";
+// import ecommerceImg from "../assets/ecommerce.webp";
+// import marketingImg from "../assets/marketing.webp";
+import websiteimg from "../assets/WebsiteDevelopment.jfif";
+import ecommerceimg from "../assets/Ecommerce.jfif";
+import marketingimg from "../assets/DigitalMarketing.jfif";
 const servicesData = [
   {
     id: 1,
     title: "Web Development",
     description:
       "Modern, scalable, high-performance websites and web apps.",
-    image: webImg,
+    image: websiteimg,
     icon: "💻",
     points: [
       "Fully Responsive",
@@ -22,7 +24,7 @@ const servicesData = [
     title: "E-Commerce",
     description:
       "Professional online stores built for conversion and growth.",
-    image: ecommerceImg,
+    image: ecommerceimg,
     icon: "🛒",
     points: [
       "Payment Gateway",
@@ -36,7 +38,7 @@ const servicesData = [
     title: "Digital Marketing",
     description:
       "Data-driven marketing strategies that increase reach and sales.",
-    image: marketingImg,
+    image: marketingimg,
     icon: "📈",
     points: [
       "Social Campaigns",

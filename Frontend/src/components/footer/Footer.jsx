@@ -1,7 +1,8 @@
 // src/components/footer/Footer.jsx
 import "./Footer.css";
 import FooterColumn from "./FooterColumn";
-import logo from "../../assets/W3Techlogo.png";
+import logo from "../../assets/W3techlabsFooterlogo.png";
+// import logo from "/W3techlabs.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -82,9 +83,9 @@ const Footer = () => {
                 </button>
               </div>
 
-              <small>
+              {/* <small>
                 I agree to your terms and policies
-              </small>
+              </small> */}
             </div>
           </div>
 
