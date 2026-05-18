@@ -1,95 +1,349 @@
-.service-card {
+/* ============================================================
+   ServiceCard.css
+   Scoped styles for the ServiceCard component.
+   Bootstrap handles column layout; this file owns everything visual.
+   ============================================================ */
+
+/* ── CSS custom props injected per-card via inline style ── */
+
+/* ── Card shell ── */
+.sc-card {
   position: relative;
-  background: #140f2f;
-  border-radius: 40px 40px 35px 35px;
-  overflow: hidden;
-  color: white;
-  transition: 0.35s ease;
-  box-shadow: 0 15px 40px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
   height: 100%;
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 60px rgba(0,0,0,.22);
-}
-
-/* top image */
-.service-card__image-wrap {
-  height: 220px;
+  background: linear-gradient(
+    160deg,
+    rgba(18, 24, 42, 0.95) 0%,
+    rgba(10, 14, 28, 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
   overflow: hidden;
-  border-radius: 40px 40px 0 0;
+  cursor: pointer;
+  transition:
+    transform       0.42s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow      0.42s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color    0.42s ease;
+
+  /* Scroll-reveal starting state */
+  opacity: 0;
+  transform: translateY(48px);
 }
 
-.service-card__image {
+/* Revealed state (added by JS IntersectionObserver) */
+.sc-card.sc-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover lift + glow */
+.sc-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(var(--sc-accent-rgb), 0.35);
+  box-shadow:
+    0 0  40px rgba(var(--sc-accent-rgb), 0.12),
+    0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Top accent line — slides in on hover */
+.sc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--sc-accent),
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10;
+}
+
+.sc-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Inner glow blob */
+.sc-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: var(--sc-glow);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sc-card:hover::after {
+  opacity: 1;
+}
+
+/* ── Image area ── */
+.sc-image-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+}
+
+.sc-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: .5s;
+  object-position: center;
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.service-card:hover .service-card__image {
+.sc-card:hover .sc-image {
   transform: scale(1.08);
 }
 
-/* floating icon */
-.service-card__icon {
+/* Cinematic overlay: dark vignette + accent tint */
+.sc-image-overlay {
   position: absolute;
-  top: 170px;
-  right: 28px;
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  background: linear-gradient(135deg,#8a4dff,#6b3cff);
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0)     0%,
+      rgba(0,0,0,0.35)  50%,
+      rgba(0,0,0,0.82)  100%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(var(--sc-accent-rgb), 0.12) 0%,
+      transparent 60%
+    );
+  transition: opacity 0.4s ease;
+}
+
+.sc-card:hover .sc-image-overlay {
+  opacity: 0.85;
+}
+
+/* Service tag on image */
+.sc-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sc-accent);
+  background: rgba(var(--sc-accent-rgb), 0.12);
+  border: 1px solid rgba(var(--sc-accent-rgb), 0.3);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 50px;
+  z-index: 2;
+}
+
+/* ── Floating icon ── */
+.sc-icon-wrap {
+  position: absolute;
+  bottom: -22px;
+  right: 22px;
+  z-index: 5;
+}
+
+.sc-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 34px;
-  box-shadow: 0 10px 30px rgba(122,70,255,.35);
+  width: 52px;
+  height: 52px;
+  font-size: 1.4rem;
+  background: rgba(var(--sc-accent-rgb), 0.15);
+  border: 1.5px solid rgba(var(--sc-accent-rgb), 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 14px;
+  box-shadow:
+    0 0 20px rgba(var(--sc-accent-rgb), 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+  line-height: 1;
 }
 
-/* body */
-.service-card__body {
-  padding: 40px 30px 25px;
+.sc-card:hover .sc-icon {
+  transform: scale(1.15) rotate(-6deg);
+  box-shadow:
+    0 0 32px rgba(var(--sc-accent-rgb), 0.5),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
-.service-card__body h3 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 16px;
+/* ── Card body ── */
+.sc-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 36px 26px 26px;
+  gap: 0;
 }
 
-.service-card__body p {
-  color: #bfbad6;
-  line-height: 1.7;
-  margin-bottom: 22px;
+/* Title */
+.sc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 12px;
 }
 
-.service-card__body ul {
+/* Description */
+.sc-desc {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.72;
+  margin: 0 0 20px;
+}
+
+/* Divider */
+.sc-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin-bottom: 18px;
+}
+
+/* Feature list */
+.sc-features {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
-.service-card__body li {
-  margin-bottom: 12px;
-  color: #f4f4f4;
-  font-weight: 500;
+.sc-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
 }
 
-/* button */
-.service-card__btn {
+/* Check icon pill */
+.sc-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--sc-accent-rgb), 0.15);
+  border: 1px solid rgba(var(--sc-accent-rgb), 0.3);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.sc-card:hover .sc-check {
+  transform: scale(1.1);
+}
+
+.sc-check svg {
+  width: 9px;
+  height: 9px;
+  stroke: var(--sc-accent);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Spacer pushes button to bottom */
+.sc-spacer { flex: 1; }
+
+/* ── CTA Button ── */
+.sc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  border: none;
-  padding: 18px;
-  background: linear-gradient(90deg,#542cf1,#8457ff);
-  color: white;
-  font-weight: 700;
-  letter-spacing: .5px;
+  padding: 13px 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--sc-accent-rgb), 0.25) 0%,
+    rgba(var(--sc-accent-rgb), 0.12) 100%
+  );
+  border: 1px solid rgba(var(--sc-accent-rgb), 0.35);
+  border-radius: 12px;
   cursor: pointer;
-  transition: .3s;
+  text-decoration: none;
+  transition:
+    background    0.35s ease,
+    border-color  0.35s ease,
+    transform     0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow    0.35s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.service-card__btn:hover {
-  filter: brightness(1.08);
+/* Shimmer sweep on hover */
+.sc-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.sc-btn:hover::before {
+  left: 100%;
+}
+
+.sc-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--sc-accent-rgb), 0.4) 0%,
+    rgba(var(--sc-accent-rgb), 0.2) 100%
+  );
+  border-color: rgba(var(--sc-accent-rgb), 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(var(--sc-accent-rgb), 0.3);
+}
+
+.sc-btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.sc-btn:hover .sc-btn-arrow {
+  transform: translateX(5px);
 }
