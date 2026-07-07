@@ -1,0 +1,311 @@
+/* ==========================================================================
+   ServicesMarquee.css
+   W3TechLabs — premium infinite services marquee
+   Design tokens:
+     bg        rgb(5, 13, 26)   (#050D1A)
+     surface   rgba(255,255,255,0.04) glass panels
+     display   'Space Grotesk' (bold, geometric, techy)
+     body      'Inter'
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&display=swap");
+
+.services-marquee-section {
+  --bg: rgb(5, 13, 26);
+  --bg-alt: rgb(9, 20, 38);
+  --line: rgba(255, 255, 255, 0.08);
+  --text-soft: rgba(226, 232, 245, 0.62);
+
+  /* Nine signature gradients — one per service family */
+  --grad-blue-a: #2e6bff;   --grad-blue-b: #8ab4ff;
+  --grad-cyan-a: #0bc7e6;   --grad-cyan-b: #7cf0ff;
+  --grad-purple-a: #8338ff; --grad-purple-b: #d18bff;
+  --grad-orange-a: #ff7a18; --grad-orange-b: #ffc16a;
+  --grad-pink-a: #ff3cac;   --grad-pink-b: #ff8fd6;
+  --grad-green-a: #12b886;  --grad-green-b: #7ef0c4;
+  --grad-yellow-a: #f7c948; --grad-yellow-b: #fff3b0;
+  --grad-red-a: #ff4d4d;    --grad-red-b: #ffa3a3;
+  --grad-teal-a: #14b8b8;   --grad-teal-b: #7fe8e0;
+
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 6rem 0 5rem;
+  isolation: isolate;
+}
+
+/* -------------------------------------------------------------------- */
+/* Ambient background: grid, glow blur, particles                       */
+/* -------------------------------------------------------------------- */
+
+.marquee-bg-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 85%);
+}
+
+.marquee-bg-glow {
+  position: absolute;
+  z-index: 0;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.28;
+  pointer-events: none;
+}
+.marquee-bg-glow-left {
+  top: -220px;
+  left: -180px;
+  background: radial-gradient(circle, var(--grad-blue-a), transparent 70%);
+}
+.marquee-bg-glow-right {
+  bottom: -260px;
+  right: -200px;
+  background: radial-gradient(circle, var(--grad-purple-a), transparent 70%);
+}
+
+.marquee-bg-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,0.55) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 28% 68%, rgba(255,255,255,0.35) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 47% 15%, rgba(255,255,255,0.4) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 63% 78%, rgba(255,255,255,0.3) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 81% 34%, rgba(255,255,255,0.45) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 92% 60%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  animation: particle-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes particle-drift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14px); }
+}
+
+/* -------------------------------------------------------------------- */
+/* Heading                                                               */
+/* -------------------------------------------------------------------- */
+
+.services-heading-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1rem;
+}
+
+.eyebrow-badge {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--grad-cyan-b);
+  background: rgba(11, 199, 230, 0.08);
+  border: 1px solid rgba(11, 199, 230, 0.25);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+.services-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #f3f6ff;
+  margin: 0 0 1rem;
+}
+
+.services-subtitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------- */
+/* Marquee tracks                                                        */
+/* -------------------------------------------------------------------- */
+
+.marquee-track-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.6rem 0;
+  /* Fade the row edges into the background via mask (belt-and-braces
+     with the .marquee-edge-fade overlay divs) */
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-track-wrapper + .marquee-row-delayed {
+  margin-top: 1.1rem;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-track.row-a {
+  animation: marquee-scroll 38s linear infinite;
+}
+
+.marquee-track.row-b {
+  animation: marquee-scroll 46s linear infinite;
+}
+
+/* Pause on hover of either row */
+.marquee-track-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Delayed second row: hidden, then fades/slides in once */
+.marquee-row-delayed {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: row-reveal 0.9s ease-out 1.4s forwards;
+}
+
+@keyframes row-reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------------------------------------------- */
+/* Chips                                                                 */
+/* -------------------------------------------------------------------- */
+
+.marquee-chip {
+  --a: var(--grad-blue-a);
+  --b: var(--grad-blue-b);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 0 0 auto;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(var(--bg-alt), var(--bg-alt)) padding-box,
+              linear-gradient(120deg, var(--a), var(--b)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+              0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease;
+  cursor: default;
+}
+
+.marquee-chip:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 0 28px -4px var(--a), 0 0 48px -10px var(--b), 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+}
+
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: linear-gradient(120deg, var(--a), var(--b));
+  box-shadow: 0 0 8px 1px var(--a);
+}
+
+.chip-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  background: linear-gradient(120deg, #f5f7ff 0%, #f5f7ff 55%, var(--b) 150%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient variants — assign each family its accent pair */
+.marquee-chip.grad-blue   { --a: var(--grad-blue-a);   --b: var(--grad-blue-b); }
+.marquee-chip.grad-cyan   { --a: var(--grad-cyan-a);   --b: var(--grad-cyan-b); }
+.marquee-chip.grad-purple { --a: var(--grad-purple-a); --b: var(--grad-purple-b); }
+.marquee-chip.grad-orange { --a: var(--grad-orange-a); --b: var(--grad-orange-b); }
+.marquee-chip.grad-pink   { --a: var(--grad-pink-a);   --b: var(--grad-pink-b); }
+.marquee-chip.grad-green  { --a: var(--grad-green-a);  --b: var(--grad-green-b); }
+.marquee-chip.grad-yellow { --a: var(--grad-yellow-a); --b: var(--grad-yellow-b); }
+.marquee-chip.grad-red    { --a: var(--grad-red-a);    --b: var(--grad-red-b); }
+.marquee-chip.grad-teal   { --a: var(--grad-teal-a);   --b: var(--grad-teal-b); }
+
+/* -------------------------------------------------------------------- */
+/* Edge fade overlays (extra insurance beyond the mask-image above)      */
+/* -------------------------------------------------------------------- */
+
+.marquee-edge-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 8vw, 160px);
+  z-index: 3;
+  pointer-events: none;
+}
+.marquee-edge-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+.marquee-edge-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+
+/* -------------------------------------------------------------------- */
+/* Responsive                                                            */
+/* -------------------------------------------------------------------- */
+
+@media (max-width: 992px) {
+  .services-marquee-section { padding: 4.5rem 0 3.5rem; }
+  .marquee-chip { padding: 0.7rem 1.2rem; }
+}
+
+@media (max-width: 576px) {
+  .services-marquee-section { padding: 3.5rem 0 2.5rem; }
+  .marquee-track { gap: 0.7rem; }
+  .marquee-chip { padding: 0.6rem 1rem; gap: 0.45rem; }
+  .marquee-bg-glow { width: 380px; height: 380px; filter: blur(90px); }
+}
+
+/* -------------------------------------------------------------------- */
+/* Accessibility                                                        */
+/* -------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .marquee-bg-particles,
+  .marquee-row-delayed {
+    animation: none !important;
+  }
+  .marquee-row-delayed { opacity: 1; transform: none; }
+}
+
