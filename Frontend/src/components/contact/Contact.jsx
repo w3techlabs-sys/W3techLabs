@@ -36,7 +36,7 @@ const Contact = () => {
 
               <div>
                 <span>Call us anytime</span>
-                <h4>+92 526 420 009</h4>
+                <h4>+92 340 5940 628</h4>
               </div>
             </div>
           </div>
