@@ -8,6 +8,7 @@ import AdminDashboard from "../pages/admin/Dashboard"
 
 export default function AppRoutes() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />

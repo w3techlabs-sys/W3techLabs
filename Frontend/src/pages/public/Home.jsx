@@ -7,6 +7,7 @@ import Services from "../../components/Services/Services";
 import Clients from "../../components/Clients/Clients";
 import Footer from "../../components/footer/Footer";
 import Contact from "../../components/contact/Contact";
+import WhatsAppButton from "../../components/common/WhatsAppButton";
 export default function Home() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Home() {
        <Clients/>
         <Contact/>
         <Footer />
+        <WhatsAppButton />
        
     </>
   )

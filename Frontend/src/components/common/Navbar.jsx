@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./Navbar.css";
 // import logo from "../../assets/W3Techlogo.png";
 import logo from "../../assets/W3techlabsFooterlogo.png";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +38,7 @@ const Navbar = () => {
     "Services",
     "About Us",
     "Contact Us",
-    "Jobs",
+    // "Jobs",
     "Our Clients",
   ];
 
