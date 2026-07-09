@@ -52,10 +52,32 @@ const Footer = () => {
               </p>
 
               <div className="footer-socials">
-                <a href="#"><FaFacebookF /></a>
-                <a href="#"><FaInstagram /></a>
-                <a href="#"><FaLinkedinIn /></a>
-                <a href="#"><FaTwitter /></a>
+                 <a
+    href="https://www.facebook.com/w3techlabs"
+    target="_blank"
+    rel="noopener noreferrer"
+  ><FaFacebookF /></a>
+                 <a
+    href="https://www.instagram.com/w3techlabs"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <FaInstagram />
+  </a>
+                <a
+    href="https://www.linkedin.com/company/w3techlabs"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <FaLinkedinIn />
+  </a>
+                <a
+    href="https://twitter.com/w3techlabs"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <FaTwitter />
+  </a>
               </div>
             </div>
           </div>
