@@ -1,0 +1,225 @@
+/* ==========================
+   Company Story
+========================== */
+
+.company-story {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.story-content {
+    padding-right: 40px;
+}
+
+.story-badge {
+    display: inline-block;
+    background: rgba(13,110,253,.08);
+     color:var(--primary-blue);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.story-title {
+    font-size: 46px;
+    font-weight: 700;
+    margin-bottom: 25px;
+     color:var(--primary-blue);
+}
+
+.story-description {
+    color: #666;
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+/* Timeline */
+
+.timeline-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 35px;
+    transition: .3s;
+}
+
+.timeline-item:hover {
+    transform: translateX(8px);
+}
+
+.timeline-icon {
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background-color:var(--primary-blue);
+
+    color: white;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+
+}
+
+.timeline-year {
+     color:var(--primary-blue);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.timeline-content h5 {
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    color: #666;
+    margin-bottom: 0;
+    line-height: 1.8;
+}
+
+/* Image */
+
+.story-image {
+    position: relative;
+}
+
+.story-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.12);
+}
+
+/* Floating Cards */
+
+.story-card {
+
+    position: absolute;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 30px rgba(0,0,0,.12);
+
+}
+
+.story-card h3 {
+
+     color:var(--primary-blue);
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+}
+
+.story-card span {
+
+    color: #666;
+
+    font-size: 14px;
+
+}
+
+.clients-card {
+
+    top: 30px;
+
+    left: -20px;
+
+}
+
+.experience-card {
+
+    bottom: 30px;
+
+    right: -20px;
+
+}
+
+/* Responsive */
+
+@media(max-width:991px){
+
+.story-content{
+
+padding-right:0;
+
+margin-bottom:60px;
+
+}
+
+.story-title{
+
+font-size:36px;
+
+}
+
+.clients-card{
+
+left:20px;
+
+}
+
+.experience-card{
+
+right:20px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.company-story{
+
+padding:70px 0;
+
+}
+
+.story-title{
+
+font-size:30px;
+
+}
+
+.story-card{
+
+position:relative;
+
+top:auto;
+
+left:auto;
+
+right:auto;
+
+bottom:auto;
+
+margin:20px auto;
+
+display:inline-block;
+
+}
+
+.story-image{
+
+text-align:center;
+
+}
+
+}
