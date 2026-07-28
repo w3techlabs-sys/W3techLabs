@@ -70,14 +70,16 @@
 }
 
 .timeline-year {
-     color:var(--primary-blue);
+     /* color:var(--primary-blue); */
     font-size: 14px;
     font-weight: 700;
+    color: #666;
 }
 
 .timeline-content h5 {
     margin: 8px 0;
-    font-weight: 600;
+    font-weight: bold;
+    color:var(--primary-blue);
 }
 
 .timeline-content p {

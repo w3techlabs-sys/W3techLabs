@@ -24,15 +24,15 @@
 
      color:var(--primary-blue);
 
-    font-size: 14px;
+    font-size: 17px;
 
-    font-weight: 600;
+    font-weight: bold;
 
     text-transform: uppercase;
 
     letter-spacing: 1px;
 
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 
 }
 
@@ -50,10 +50,10 @@
 
 .mv-description {
 
-    /* color: #666; */
-color: #ffffff;
+    color: #666;
+/* color: #ffffff; */
     font-size: 17px;
-
+    font-weight: bold;
     line-height: 1.9;
 
 }
@@ -114,13 +114,14 @@ color: #ffffff;
 
 .mission-icon{
      /* background-color: var(--primary-blue); */
-    background: linear-gradient(135deg,#0d6efd,#2563eb);
+    /* background: linear-gradient(135deg,#0d6efd,#2563eb); */
+    background-color: #666;
 
 }
 
 .vision-icon{
-
-    background: linear-gradient(135deg,#6f42c1,#9333ea);
+    background-color: #666;
+    /* background: linear-gradient(135deg,#6f42c1,#9333ea); */
 
 }
 
@@ -129,8 +130,8 @@ color: #ffffff;
     font-size: 28px;
 
     font-weight: 700;
-
-    color: #222;
+    color: #ffffff;
+    /* color: #222; */
 
     margin-bottom: 20px;
 
@@ -139,7 +140,7 @@ color: #ffffff;
 .mv-card p{
 
     color:#666;
-
+     font-weight: bold;
     line-height:1.9;
 
     margin-bottom:0;
