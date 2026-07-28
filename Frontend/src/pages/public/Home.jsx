@@ -1,8 +1,8 @@
 import Navbar from "../../components/common/Navbar"
 import Herobanner from "../../components/ui/HeroBanner"
-import AboutSection from "../../components/about/AboutSection/AboutSection";
-import CompanyStory from "../../components/about/CompanyStory/CompanyStory";
-import MissionVision from "../../components/about/MissionVision/MissionVision";
+import AboutSection from "../../components/About/AboutSection/AboutSection";
+import CompanyStory from "../../components/About/CompanyStory/CompanyStory";
+import MissionVision from "../../components/About/MissionVision/MissionVision";
 // import About from "../../components/About/About"
 // import Hero from "../../components/ui/Hero"
 import ServicesMarquee from "../../components/ServicesMarquee/ServicesMarquee"
